@@ -14,10 +14,6 @@ canvas.drawing { 🐢 in
 
     🐢.penColor(.red)
     🐢.penDown()
-    🐢.forward(100)
-    🐢.left(40)
-    🐢.forward(100)
-    🐢.left(-40)
     
 
     // draw a square
@@ -64,32 +60,32 @@ canvas.drawing { 🐢 in
 //    }
     
     // Instantiate a ImageCanvas
-//    let canvie = ImageCanvas(size: CGSize(width: 1500, height: 1500))
-//
-//    canvie.drawing { 🐢 in
-//
-//        // make it an adjustable function
-//        func adjustableSquare(size: Double) {
-//            for i in 1 ... 4 {
-//                🐢.left(90)
-///Users/mgreen/GitHub Clones/TortoiseGraphics-master/Playground/Playground.playground/Pages/With a tortoise.xcplaygroundpage                🐢.forward(size)
-//            }
-//        }
-//
-//        for i in 1...90 {
-//            adjustableSquare(size: 300)
-//            🐢.left(4)
-//        }
-//    }
-//
-//    let cgImage = canvie.cgImage
-//
-//    let image = canvie.image
-//
-//    //canvie.writePNG(to: URL(fileURLWithPath: "./image.png"))
-//
-//    let desktop = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop")
-//    canvie.writePNG(to: desktop.appendingPathComponent("image.png"))
-//
-//
+    let canvie = ImageCanvas(size: CGSize(width: 1500, height: 1500))
+    
+    canvie.drawing { 🐢 in
+        
+        // make it an adjustable function
+        func adjustableSquare(size: Double) {
+            for i in 1 ... 4 {
+                🐢.left(90)
+                🐢.forward(size)
+            }
+        }
+        
+        for i in 1...90 {
+            adjustableSquare(size: 300)
+            🐢.left(4)
+        }
+    }
+    
+    let cgImage = canvie.cgImage
+    
+    let image = canvie.image
+    
+    //canvie.writePNG(to: URL(fileURLWithPath: "./image.png"))
+    
+    let desktop = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop")
+    canvie.writePNG(to: desktop.appendingPathComponent("image.png"))
+    
+  
 }
