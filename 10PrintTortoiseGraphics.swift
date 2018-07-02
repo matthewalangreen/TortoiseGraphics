@@ -1,10 +1,13 @@
-//: # With a tortoise 🐢
-//: [👉 With 2 tortoises 🐢🐢](@next)
+// Uses TortoiseGraphics: https://github.com/temoki/TortoiseGraphics
+
+
+
 import PlaygroundSupport
 import TortoiseGraphics
 import CoreGraphics
 import Foundation
 
+// Global to keep track of PlaygroundCanvas dimsensions
 let width: Double = 400
 let height: Double = 400
 
@@ -14,14 +17,14 @@ canvas.color = .white
 PlaygroundPage.current.liveView = canvas
 
 canvas.drawing { 🐢 in
-
+    
     🐢.penColor(.purple)
     
     // set top line value to track position of turtle
     var topLineHeight: Double = 0
     var onTopLine: Bool = false
     var xPos: Double = 0
-   
+    
     // setup function to move turtle to top left of screen
     func topLeftCanvas() {
         🐢.penUp()
@@ -34,7 +37,7 @@ canvas.drawing { 🐢 in
     func downLine(length: Double) {
         // get to correct starting position if needed
         if !onTopLine {
-           moveToTopCorner(length: length)
+            moveToTopCorner(length: length)
         }
         🐢.penDown()
         🐢.right(45)
@@ -85,7 +88,7 @@ canvas.drawing { 🐢 in
         // draw upLine()
         if  p > 0.5 { upLine(length: length) }
             
-        // draw downLine()
+            // draw downLine()
         else { downLine(length: length) }
     }
     
@@ -104,7 +107,7 @@ canvas.drawing { 🐢 in
     
     // move to starting position
     topLeftCanvas()
-
+    
     // 10Print
     while topLineHeight <= height {
         drawLine(length: 100/sqrt(2))
