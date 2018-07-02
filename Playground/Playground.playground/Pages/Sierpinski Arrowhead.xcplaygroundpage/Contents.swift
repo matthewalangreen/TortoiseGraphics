@@ -43,9 +43,12 @@ canvas.drawing { 🐢 in
     }
     //🐢.left(60)
     for i in 1...10 {
-        arrowhead(order: 3, length: 60)
+        arrowhead(order: 4, length: 60)
         🐢.left(20)
+        //🐢.penColor(Color.randomColor())
     }
+    
+    
    //arrowhead(order: 3, length: 100)
 //    🐢.left(20)
 //   // 🐢.penColor(.orange)

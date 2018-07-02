@@ -5,87 +5,140 @@ import TortoiseGraphics
 import CoreGraphics
 import Foundation
 
-let canvas = PlaygroundCanvas(frame: CGRect(x: 0, y: 0, width: 800, height: 800))
+let width: Double = 400
+let height: Double = 400
+
+let canvas = PlaygroundCanvas(frame: CGRect(x: 0, y: 0, width: width, height: height))
 canvas.frameRate = 30
 canvas.color = .white
 PlaygroundPage.current.liveView = canvas
 
 canvas.drawing { 🐢 in
 
-    🐢.penColor(.red)
-    🐢.penDown()
+    🐢.penColor(.lightBlue)
+    var topLineHeight: Double = 0
+    var onTopLine: Bool = false
+    var xPos: Double = 0
+   
+    func topLeftCanvas() {
+        🐢.penUp()
+        🐢.forward(height/2)
+        🐢.left(90)
+        🐢.forward(width/2)
+        🐢.left(180)
+        onTopLine = true
+    }
     
-
-    // draw a square
-//    🐢.forward(100)
-//    🐢.left(90)
-//    🐢.forward(100)
-//    🐢.left(90)
-//    🐢.forward(100)
-//    🐢.left(90)
-//    🐢.forward(100)
-//    🐢.left(90)
+    func downLine(length: Double) {
+        🐢.penDown()
+        🐢.right(45)
+        🐢.forward(length)
+        🐢.left(45)
+        🐢.penUp()
+        onTopLine = false
+        updateXPos(length: length)
+    }
     
+    func upLine(length: Double) {
+        🐢.penDown()
+        🐢.left(45)
+        🐢.forward(length)
+        🐢.right(45)
+        🐢.penUp()
+        onTopLine = true
+        updateXPos(length: length)
+    }
     
-    // look for repeats...
-//    for i in 1 ... 4 {
-//        🐢.forward(100)
-//        🐢.left(90)
-//    }
+    func moveToTopCorner(length: Double) {
+        🐢.left(90)
+        🐢.forward(length/sqrt(2))
+        🐢.right(90)
+        onTopLine = true
+    }
     
-    //make it a function
-//    func square() {
-//        for i in 1 ... 4 {
-//            🐢.left(90)
-//            🐢.forward(100)
-//        }
-//    }
+    func moveToBottomCorner(length: Double) {
+        🐢.right(90)
+        🐢.forward(length/sqrt(2))
+        🐢.left(90)
+        onTopLine = false
+    }
     
-    // try it out
-    //square()
-    
-//    // make it an adjustable function
-//    func adjustableSquare(size: Double) {
-//        for i in 1 ... 4 {
-//            🐢.left(90)
-//            🐢.forward(size)
-//        }
-//    }
-    
-    
-    // let's make something out of those squares
-//    for i in 1...90 {
-//        adjustableSquare(size: 100)
-//        🐢.left(4)
-//    }
-    
-    // Instantiate a ImageCanvas
-    let canvie = ImageCanvas(size: CGSize(width: 1500, height: 1500))
-    
-    canvie.drawing { 🐢 in
-        
-        // make it an adjustable function
-        func adjustableSquare(size: Double) {
-            for i in 1 ... 4 {
-                🐢.left(90)
-                🐢.forward(size)
+    func chooseLine(length: Double){
+        var p = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+        print(p)
+        if  p > 0.5 {
+            // do upline
+            if onTopLine {
+                moveToBottomCorner(length: length)
+                upLine(length: length)
+            } else {
+                upLine(length: length)
             }
-        }
-        
-        for i in 1...90 {
-            adjustableSquare(size: 300)
-            🐢.left(4)
+        } else { // do downline
+            if onTopLine {
+                downLine(length: length)
+            } else {
+                moveToTopCorner(length: length)
+                downLine(length: length)
+            }
         }
     }
     
-    let cgImage = canvie.cgImage
+    func updateXPos(length: Double) {
+        xPos += length/sqrt(2)
+        if xPos >= width {
+            xPos = 0
+            topLineHeight += length/sqrt(2)
+            🐢.goto(-width/2, width/2-topLineHeight)
+            onTopLine = true
+        }
+    }
     
-    let image = canvie.image
-    
-    //canvie.writePNG(to: URL(fileURLWithPath: "./image.png"))
-    
-    let desktop = FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Desktop")
-    canvie.writePNG(to: desktop.appendingPathComponent("image.png"))
+    topLeftCanvas()
+    🐢.xcor
+    🐢.ycor
+    onTopLine
+    topLineHeight
+    while topLineHeight <= height {
+        chooseLine(length: 100/sqrt(2))
+    }
+//    for i in 1...100 {
+//       chooseLine(length: 25/sqrt(2))
+//    }
     
   
+ 
+    
+    
+    
+    
+//    downLine(length: 100)
+//    upLine(length: 100)
+//    moveToBottomCorner(length: 100)
+//    upLine(length: 100)
+    //moveToTopCorner(length: 100)
+    //upLine(length: 100)
+    
+    // we need a way to keep track of
+    // where we are in row, column
+    // if 🐢.xpos > width { reset xpos, yPos += length/sqrt(2) }
+    // if 🐢.y > height {stop}
+    
+    // now we just need the turtle
+    // to decide after each iteration
+    // if its going to draw an upline
+    // or downline
+    
+    // Steps:
+    // 1. go to top left
+    
+    // choose line:
+    // if upline {
+    //  moveToBottomCorner(length: <#T##Double#>)
+    //} else {
+    
+//}
+    
+    
+    
 }
